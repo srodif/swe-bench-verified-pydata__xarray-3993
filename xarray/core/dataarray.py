@@ -100,7 +100,7 @@ def _infer_coords_and_dims(
         raise ValueError(
             "coords is not dict-like, but it has %s items, "
             "which does not match the %s dimensions of the "
-            "data" % (len(coords), len(shape))
+            "data." % (len(coords), len(shape))
         )
 
     if isinstance(dims, str):
