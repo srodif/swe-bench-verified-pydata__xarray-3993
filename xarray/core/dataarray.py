@@ -100,7 +100,7 @@ def _infer_coords_and_dims(
         raise ValueError(
             "coords is not dict-like, but it has %s items, "
             "which does not match the %s dimensions of the "
-            "data" % (len(coords), len(shape))
+            "data." % (len(coords), len(shape))
         )
 
     if isinstance(dims, str):
@@ -3481,17 +3481,17 @@ class DataArray(AbstractArray, DataWithCoords):
         return self._from_temp_dataset(ds)
 
     def integrate(
-        self, dim: Union[Hashable, Sequence[Hashable]], datetime_unit: str = None
+        self, coord: Union[Hashable, Sequence[Hashable]], datetime_unit: str = None
     ) -> "DataArray":
         """ integrate the array with the trapezoidal rule.
 
         .. note::
-            This feature is limited to simple cartesian geometry, i.e. dim
+            This feature is limited to simple cartesian geometry, i.e. coord
             must be one dimensional.
 
         Parameters
         ----------
-        dim : hashable, or sequence of hashable
+        coord : hashable, or sequence of hashable
             Coordinate(s) used for the integration.
         datetime_unit : {"Y", "M", "W", "D", "h", "m", "s", "ms", "us", "ns", \
                          "ps", "fs", "as"}, optional
@@ -3528,7 +3528,7 @@ class DataArray(AbstractArray, DataWithCoords):
         array([5.4, 6.6, 7.8])
         Dimensions without coordinates: y
         """
-        ds = self._to_temp_dataset().integrate(dim, datetime_unit)
+        ds = self._to_temp_dataset().integrate(coord, datetime_unit)
         return self._from_temp_dataset(ds)
 
     def unify_chunks(self) -> "DataArray":
